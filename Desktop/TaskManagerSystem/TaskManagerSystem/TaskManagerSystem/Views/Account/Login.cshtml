@@ -1,0 +1,121 @@
+@{
+    ViewData["Title"] = "Giriş Yap";
+    // Navbar'ın görünmemesi için Layout içindeki kontrolü tetikler
+    Layout = "_Layout";
+}
+
+<style>
+    /* Sayfa ortalama ve arka plan */
+    .auth-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #1e1e2f; /* Taslaktaki koyu mor */
+    }
+
+    .auth-card {
+        background: #27293d; /* Kart rengi */
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        width: 100%;
+        max-width: 400px;
+        padding: 40px;
+    }
+
+    .auth-title {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .form-label {
+        color: rgba(255,255,255,0.7);
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        background: #1e1e2f;
+        border: 1px solid #32354a;
+        color: white;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+        .form-control:focus {
+            background: #1e1e2f;
+            border-color: #ba54f5;
+            color: white;
+            box-shadow: none;
+        }
+
+    .btn-auth {
+        background: linear-gradient(135deg, #ba54f5 0%, #e14eca 100%);
+        border: none;
+        padding: 12px;
+        font-weight: 600;
+        color: white;
+        margin-top: 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+        .btn-auth:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+            color: white;
+        }
+
+    .auth-link {
+        color: #ba54f5;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+</style>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="text-center mb-4">
+            <i class="fa-solid fa-layer-group fa-3x text-info"></i>
+        </div>
+        <h3 class="auth-title">Tekrar Hoş Geldin!</h3>
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">E-posta Adresi</label>
+                <input type="email" class="form-control" name="email" required placeholder="isim@mail.com" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Şifre</label>
+                <input type="password" class="form-control" name="password" required placeholder="••••••••" />
+            </div>
+
+            <button type="submit" class="btn btn-auth w-100 shadow">Giriş Yap</button>
+        </form>
+
+        <p class="text-center mt-4 mb-0" style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+            Hesabın yok mu? <a href="/Account/Register" class="auth-link">Hemen Kayıt Ol</a>
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (TempData["Message"] != null)
+{
+    <script>
+        Swal.fire({
+            title: '@TempData["Message"]',
+            icon: '@TempData["MessageType"]',
+            background: '#27293d',
+            color: '#fff',
+            confirmButtonColor: '#ba54f5'
+        });
+    </script>
+}

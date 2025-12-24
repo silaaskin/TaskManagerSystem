@@ -1,0 +1,107 @@
+@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "_Layout";
+}
+
+<style>
+    /* Login ile aynı stil yapısı kullanılıyor */
+    .auth-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #1e1e2f;
+        padding: 20px;
+    }
+
+    .auth-card {
+        background: #27293d;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        width: 100%;
+        max-width: 450px;
+        padding: 40px;
+    }
+
+    .auth-title {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+
+    .form-label {
+        color: rgba(255,255,255,0.7);
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        background: #1e1e2f;
+        border: 1px solid #32354a;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+        .form-control:focus {
+            background: #1e1e2f;
+            border-color: #ba54f5;
+            color: white;
+            box-shadow: none;
+        }
+
+    .btn-auth {
+        background: linear-gradient(135deg, #00f2c3 0%, #0098f0 100%); /* Kayıt için farklı gradient */
+        border: none;
+        padding: 12px;
+        font-weight: 600;
+        color: white;
+        margin-top: 15px;
+        border-radius: 8px;
+    }
+
+    .auth-link {
+        color: #00f2c3;
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h3 class="auth-title">Yeni Hesap Oluştur</h3>
+
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">Ad Soyad</label>
+                <input type="text" class="form-control" name="name" required placeholder="Adınız" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">E-posta</label>
+                <input type="email" class="form-control" name="email" required placeholder="isim@mail.com" />
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Şifre</label>
+                    <input type="password" class="form-control" name="password" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Şifre Tekrar</label>
+                    <input type="password" class="form-control" name="confirmPassword" required />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-auth w-100 shadow">Kayıt İşlemini Tamamla</button>
+        </form>
+
+        <p class="text-center mt-4 mb-0" style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+            Zaten üye misin? <a href="/Account/Login" class="auth-link">Giriş Yap</a>
+        </p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
