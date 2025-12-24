@@ -1,0 +1,623 @@
+﻿@using Newtonsoft.Json
+@model List<TaskManagerSystem.Models.UserTask>
+
+@{
+	ViewData["Title"] = "Görevlerim";
+	Layout = "_Layout";
+	bool isAdmin = ViewBag.IsAdmin == true;
+
+	var userName = Context.Session.GetString("UserName");
+	var userId = Context.Session.GetInt32("UserId");
+}
+<style>
+	:root {
+		--bg-deep-purple: #1e1e2f;
+		--card-purple: #27293d;
+		--accent-purple: #ba54f5;
+		--text-bright: #ffffff;
+	}
+
+	body {
+		background-color: var(--bg-deep-purple) !important;
+		color: var(--text-bright);
+	}
+
+	.glass-card {
+		background: var(--card-purple);
+		border-radius: 20px;
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		padding: 25px;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+	}
+
+	.modern-card {
+		border: none;
+		border-radius: 15px;
+		transition: all 0.3s ease;
+		height: 100%;
+		position: relative;
+		overflow: hidden;
+		color: white;
+	}
+
+		.modern-card:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+		}
+
+	/* Durum Renkleri - Tüm Kart Arka Planı */
+	.bg-todo {
+		background: linear-gradient(135deg, #1d8cf8 0%, #1165b5 100%);
+	}
+
+	.bg-progress {
+		background: linear-gradient(135deg, #ba54f5 0%, #8b22d1 100%);
+	}
+
+	.bg-completed {
+		background: linear-gradient(135deg, #00f2c3 0%, #0098f0 100%);
+	}
+
+	.bg-overdue {
+		background: linear-gradient(135deg, #fd5d93 0%, #ec250d 100%);
+	}
+
+	.bg-urgent {
+		background: linear-gradient(135deg, #ff8d72 0%, #ff6491 100%);
+	}
+
+	/* Durum Badge Renkleri */
+	.badge-todo {
+		background: linear-gradient(135deg, #1d8cf8 0%, #1165b5 100%);
+	}
+
+	.badge-progress {
+		background: linear-gradient(135deg, #ba54f5 0%, #8b22d1 100%);
+	}
+
+	.badge-completed {
+		background: linear-gradient(135deg, #00f2c3 0%, #0098f0 100%);
+	}
+
+	.badge-overdue {
+		background: linear-gradient(135deg, #fd5d93 0%, #ec250d 100%);
+	}
+
+	.badge-urgent {
+		background: linear-gradient(135deg, #ff8d72 0%, #ff6491 100%);
+	}
+
+	.chart-container {
+		background: var(--card-purple);
+		border-radius: 15px;
+		padding: 15px;
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		height: 200px;
+	}
+
+		.chart-container canvas {
+			max-height: 150px !important;
+		}
+
+	.form-select option {
+		background-color: #27293d;
+		color: white;
+	}
+
+	.form-control::placeholder {
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	.form-select:focus, .form-control:focus {
+		background: rgba(255,255,255,0.15) !important;
+		color: white !important;
+		border-color: var(--accent-purple) !important;
+		box-shadow: 0 0 0 0.2rem rgba(186, 84, 245, 0.25) !important;
+	}
+
+	.status-badge {
+		padding: 5px 12px;
+		border-radius: 12px;
+		font-size: 0.7rem;
+		font-weight: bold;
+		color: white;
+		background: rgba(0, 0, 0, 0.25);
+		box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+	}
+
+	.btn-action {
+		width: 32px;
+		height: 32px;
+		padding: 0;
+		border-radius: 50%;
+		transition: all 0.3s ease;
+	}
+
+		.btn-action:hover {
+			transform: scale(1.1);
+		}
+
+	/* YENİ: Dosya Badge Stili */
+	.attachment-badge {
+		position: absolute;
+		top: 12px;
+		right: 12px;
+		background: rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(10px);
+		color: white;
+		padding: 4px 10px;
+		border-radius: 20px;
+		font-size: 0.7rem;
+		font-weight: bold;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+		z-index: 10;
+	}
+
+		.attachment-badge i {
+			font-size: 0.8rem;
+			animation: pulse 2s infinite;
+		}
+
+	@@keyframes pulse {
+		0%, 100% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 0.6;
+		}
+	}
+</style>
+
+<div class="container-fluid py-4 px-lg-5">
+	<div class="glass-card mb-4 d-flex justify-content-between align-items-center">
+		<div>
+			<h3 class="fw-bold mb-1"><i class="fa-solid fa-grid-2 me-2"></i>Görev Paneli</h3>
+			<p class="text-white-50 mb-0 small">@userName, projelerini buradan yönetebilirsin.</p>
+		</div>
+		<a href="/Tasks/Create" class="btn btn-primary rounded-pill px-4" style="background: var(--accent-purple); border:none;">
+			<i class="fa-solid fa-plus me-2"></i>Yeni Görev
+		</a>
+	</div>
+
+	<div class="mb-4">
+		<div class="glass-card">
+			<div class="d-flex align-items-center mb-3">
+				<i class="fa-solid fa-filter me-2" style="font-size: 1.2rem;"></i>
+				<h5 class="fw-bold mb-0">Filtreleme Seçenekleri</h5>
+			</div>
+
+			<div class="row g-3">
+				<!-- Kategori -->
+				<div class="col-md-3">
+					<label class="small text-white-50 mb-2">
+						<i class="fa-solid fa-folder me-1"></i> Kategori
+					</label>
+					<select class="form-select" id="filterCategory" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+						<option value="">Tümü</option>
+						<option value="1">İş</option>
+						<option value="2">Kişisel</option>
+						<option value="3">Diğer</option>
+					</select>
+				</div>
+
+				<!-- Durum -->
+				<div class="col-md-3">
+					<label class="small text-white-50 mb-2">
+						<i class="fa-solid fa-chart-bar me-1"></i> Durum
+					</label>
+					<select class="form-select" id="filterStatus" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+						<option value="">Tümü</option>
+						<option value="0">Başlanmadı</option>
+						<option value="1">Devam Ediyor</option>
+						<option value="2">Tamamlandı</option>
+					</select>
+				</div>
+
+				<!-- Tamamlanma -->
+				<div class="col-md-2">
+					<label class="small text-white-50 mb-2">
+						<i class="fa-solid fa-check-circle me-1"></i> Tamamlanma
+					</label>
+					<select class="form-select" id="filterCompleted" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+						<option value="">Tümü</option>
+						<option value="true">Tamamlanan</option>
+						<option value="false">Tamamlanmayan</option>
+					</select>
+				</div>
+
+				<!-- Gecikmiş -->
+				<div class="col-md-2">
+					<label class="small text-white-50 mb-2">
+						<i class="fa-solid fa-exclamation-circle me-1"></i> Gecikmiş
+					</label>
+					<select class="form-select" id="filterOverdue" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+						<option value="">Tümü</option>
+						<option value="true">Sadece Gecikenler</option>
+					</select>
+				</div>
+
+				<!-- Yaklaşan Görevler -->
+				<div class="col-md-2">
+					<label class="small text-white-50 mb-2">
+						<i class="fa-solid fa-calendar-days me-1"></i> Yaklaşan
+					</label>
+					<input type="number" class="form-control" id="filterUpcoming" placeholder="X gün" min="1"
+						   style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+				</div>
+			</div>
+
+			<div class="row g-3 mt-2">
+				<!-- Arama -->
+				<div class="col-md-10">
+					<label class="small text-white-50 mb-2">
+						<i class="fa-solid fa-magnifying-glass me-1"></i> Arama
+					</label>
+					<input type="text" class="form-control" id="filterSearch" placeholder="Görev başlığı veya açıklamasında ara..."
+						   style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">
+				</div>
+
+				<!-- Filtrele Butonu -->
+				<div class="col-md-2 d-flex align-items-end">
+					<button class="btn w-100" onclick="applyAllFilters()"
+							style="background: var(--accent-purple); border: none; color: white; font-weight: bold; padding: 10px;">
+						<i class="fa-solid fa-filter me-2"></i>FİLTRELE
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row mb-4">
+		<div class="col-lg-6 mb-3">
+			<div class="chart-container shadow">
+				<h6 class="small fw-bold mb-2"><i class="fa-solid fa-chart-pie me-2"></i>GÖREV DURUMU</h6>
+				<div style="height: 150px; position: relative;">
+					<canvas id="statusChart"></canvas>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6 mb-3">
+			<div class="chart-container shadow">
+				<h6 class="small fw-bold mb-2"><i class="fa-solid fa-chart-column me-2"></i>KATEGORİ ANALİZİ</h6>
+				<div style="height: 150px; position: relative;">
+					<canvas id="categoryChart"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row g-4" id="tasksContainer">
+		@foreach (var task in Model)
+		{
+			var dueDateTime = task.DueDate.Date + task.DueTime;
+			var remaining = dueDateTime - DateTime.Now;
+
+			string cardBgClass = "bg-todo";
+			string badgeClass = "badge-todo";
+			string icon = "fa-calendar";
+			string statusName = "Bekliyor";
+			string nextAction = "Başla";
+			string nextIcon = "fa-play";
+
+			// Durum belirleme mantığı
+			if (task.Status == 2)
+			{
+				cardBgClass = "bg-completed";
+				badgeClass = "badge-completed";
+				icon = "fa-check-double";
+				statusName = "Tamamlandı";
+				nextAction = "Geri Al";
+				nextIcon = "fa-rotate-left";
+			}
+			else if (remaining.TotalSeconds <= 0)
+			{
+				cardBgClass = "bg-overdue";
+				badgeClass = "badge-overdue";
+				icon = "fa-triangle-exclamation";
+				statusName = "Gecikti";
+				nextAction = "Başla";
+				nextIcon = "fa-play";
+			}
+			else if (remaining.TotalHours <= 24 && remaining.TotalSeconds > 0)
+			{
+				cardBgClass = "bg-urgent";
+				badgeClass = "badge-urgent";
+				icon = "fa-hourglass-half";
+				statusName = "Acil";
+				nextAction = task.Status == 1 ? "Bitir" : "Başla";
+				nextIcon = task.Status == 1 ? "fa-check" : "fa-play";
+			}
+			else if (task.Status == 1)
+			{
+				cardBgClass = "bg-progress";
+				badgeClass = "badge-progress";
+				icon = "fa-spinner fa-spin";
+				statusName = "Devam Ediyor";
+				nextAction = "Bitir";
+				nextIcon = "fa-check";
+			}
+
+			// YENİ: Dosya sayısını hesapla
+			var attachmentCount = task.Attachments?.Count ?? 0;
+
+			<div class="col-xl-3 col-lg-4 col-md-6 task-item"
+				 data-category="@task.Category"
+				 data-status="@task.Status"
+				 data-duedate="@dueDateTime.ToString("yyyy-MM-dd HH:mm:ss")"
+				 data-overdue="@(remaining.TotalSeconds <= 0 && task.Status != 2 ? "true" : "false")">
+				<div class="modern-card @cardBgClass p-4 shadow-sm">
+					<!-- YENİ: Dosya Sayısı Badge (Sağ Üstte) -->
+					@if (attachmentCount > 0)
+					{
+						<div class="attachment-badge">
+							<i class="fa-solid fa-paperclip"></i>
+							<span>@attachmentCount</span>
+						</div>
+					}
+
+					<div class="d-flex justify-content-between align-items-start mb-3">
+						<span class="status-badge @badgeClass">
+							<i class="fa-solid @icon me-1"></i> @statusName
+						</span>
+						@if (isAdmin)
+						{
+							<span class="badge"
+								  style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+                 font-size: 0.65rem;
+                 padding: 6px 10px;">
+								<i class="fa-solid fa-user me-1"></i>
+								@(task.User != null ? task.User.Name : "Kullanıcı yok")
+							</span>
+						}
+
+					</div>
+
+					<h5 class="fw-bold text-truncate mb-2" style="color: white;">@task.Title</h5>
+
+		
+					@if (task.CreatedByUserId.HasValue && task.UserId != task.CreatedByUserId && task.UserId == userId && task.Creator != null)
+					{
+						<div class="d-flex align-items-center mb-2" style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 4px 10px; width: fit-content; border: 1px solid rgba(255,255,255,0.3);">
+							<i class="fa-solid fa-user-shield me-2" style="color: #ffffff; font-size: 0.8rem;"></i>
+							<span class="small fw-bold" style="color: #ffffff; font-size: 0.75rem;">@task.Creator.Name size görev atadı</span>
+						</div>
+					}
+
+					@if (isAdmin && task.CreatedByUserId == userId && task.UserId != userId && task.User != null)
+					{
+						<div class="d-flex align-items-center mb-2" style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 4px 10px; width: fit-content; border: 1px solid rgba(255,255,255,0.3);">
+							<i class="fa-solid fa-paper-plane me-2" style="color: #ffffff; font-size: 0.8rem;"></i>
+							<span class="small fw-bold" style="color: #ffffff; font-size: 0.75rem;">@task.User.Name kullanıcısına görev atadınız</span>
+						</div>
+					}
+
+					<p class="small text-white-50 mb-3" style="height: 45px; overflow: hidden; line-height: 1.5;">
+						@(string.IsNullOrEmpty(task.Description) ? "Açıklama yok" : task.Description)
+					</p>
+				
+
+					<div class="mb-3 pb-3 border-bottom border-white border-opacity-10">
+						<div class="d-flex justify-content-between small">
+							<span class="text-white-50">
+								<i class="fa-solid fa-tag me-1"></i>
+								@(task.Category == 1 ? "İş" : task.Category == 2 ? "Kişisel" : "Diğer")
+							</span>
+							<span class="text-white-50">
+								<i class="fa-regular fa-clock me-1"></i>
+								@dueDateTime.ToString("dd MMM HH:mm")
+							</span>
+						</div>
+					</div>
+
+					<div class="d-flex justify-content-between align-items-center">
+						<a href="/Tasks/Edit/@task.Id" class="btn btn-sm btn-outline-light btn-action" title="Düzenle">
+							<i class="fa-solid fa-edit" style="font-size: 0.8rem;"></i>
+						</a>
+
+						<form asp-action="StatusUpdate" asp-route-id="@task.Id" method="post" class="d-inline">
+							<button type="submit" class="btn btn-sm btn-warning btn-action text-dark" title="@nextAction">
+								<i class="fa-solid @nextIcon" style="font-size: 0.8rem;"></i>
+							</button>
+						</form>
+
+						<form asp-action="Delete" asp-route-id="@task.Id" method="post" class="d-inline" onsubmit="return confirm('Bu görevi silmek istediğinize emin misiniz?')">
+							<button type="submit" class="btn btn-sm btn-danger btn-action" title="Sil">
+								<i class="fa-solid fa-trash" style="font-size: 0.8rem;"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+
+	@if (Model.Count == 0)
+	{
+		<div class="glass-card text-center py-5">
+			<i class="fa-solid fa-inbox fa-3x mb-3 opacity-50"></i>
+			<h4 class="mb-2">Henüz görev yok</h4>
+			<p class="opacity-75">Yeni bir görev ekleyerek başlayın!</p>
+		</div>
+	}
+</div>
+
+@section Scripts {
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		const rawData = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+		// Durum Grafiği - Gecikmiş görevler dahil (DÜZELTME)
+		const now = new Date();
+
+		// Tamamlanmış görevler
+		const completedTasks = rawData.filter(t => t.Status === 2).length;
+
+		// Gecikmiş görevler (Tamamlanmamış VE süre geçmiş)
+		const overdueTasks = rawData.filter(t => {
+			if (t.Status === 2) return false; // Tamamlanmışlar gecikmiş sayılmaz
+			const dueDate = new Date(t.DueDate);
+			const [hours, minutes] = t.DueTime.split(':');
+			dueDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+			return dueDate < now;
+		}).length;
+
+		// Devam eden görevler (Status = 1 VE süresi geçmemiş)
+		const inProgressTasks = rawData.filter(t => {
+			if (t.Status !== 1) return false;
+			const dueDate = new Date(t.DueDate);
+			const [hours, minutes] = t.DueTime.split(':');
+			dueDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+			return dueDate >= now;
+		}).length;
+
+		// Başlanmamış görevler (Status = 0 VE süresi geçmemiş)
+		const notStartedTasks = rawData.filter(t => {
+			if (t.Status !== 0) return false;
+			const dueDate = new Date(t.DueDate);
+			const [hours, minutes] = t.DueTime.split(':');
+			dueDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+			return dueDate >= now;
+		}).length;
+
+		new Chart(document.getElementById('statusChart'), {
+			type: 'doughnut',
+			data: {
+				labels: ['Tamamlandı', 'Devam Ediyor', 'Başlanmadı', 'Gecikmiş'],
+				datasets: [{
+					data: [completedTasks, inProgressTasks, notStartedTasks, overdueTasks],
+					backgroundColor: ['#00f2c3', '#ba54f5', '#1d8cf8', '#fd5d93'],
+					borderWidth: 0,
+					cutout: '65%'
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				plugins: {
+					legend: {
+						position: 'bottom',
+						labels: {
+							color: '#fff',
+							font: { size: 10 },
+							padding: 8,
+							usePointStyle: true,
+							boxWidth: 8
+						}
+					}
+				}
+			}
+		});
+
+		// Kategori Grafiği - Mor/Turuncu tonlar
+		new Chart(document.getElementById('categoryChart'), {
+			type: 'bar',
+			data: {
+				labels: ['İş', 'Kişisel', 'Diğer'],
+				datasets: [{
+					label: 'Görevler',
+					data: [
+						rawData.filter(t => t.Category === 1).length,
+						rawData.filter(t => t.Category === 2).length,
+						rawData.filter(t => t.Category === 3).length
+					],
+					backgroundColor: ['#d97706', '#f59e0b', '#fbbf24'],
+					borderRadius: 6,
+					borderWidth: 0
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: true,
+				scales: {
+					x: {
+						ticks: { color: '#fff', font: { size: 10 } },
+						grid: { display: false }
+					},
+					y: {
+						beginAtZero: true,
+						ticks: { color: '#fff', stepSize: 1, font: { size: 10 } },
+						grid: { color: 'rgba(255,255,255,0.05)' }
+					}
+				},
+				plugins: {
+					legend: { display: false }
+				}
+			}
+		});
+
+		// Çoklu Filtreleme Sistemi
+		function applyAllFilters() {
+			const category = document.getElementById('filterCategory').value;
+			const status = document.getElementById('filterStatus').value;
+			const completed = document.getElementById('filterCompleted').value;
+			const overdue = document.getElementById('filterOverdue').value;
+			const upcoming = document.getElementById('filterUpcoming').value;
+			const searchText = document.getElementById('filterSearch').value.toLowerCase().trim();
+
+			const tasks = document.querySelectorAll('.task-item');
+			const now = new Date();
+
+			tasks.forEach(task => {
+				let show = true;
+
+				// Kategori filtresi
+				if (category && task.getAttribute('data-category') !== category) {
+					show = false;
+				}
+
+				// Durum filtresi
+				if (status && task.getAttribute('data-status') !== status) {
+					show = false;
+				}
+
+				// Tamamlanma filtresi
+				if (completed === 'true' && task.getAttribute('data-status') !== '2') {
+					show = false;
+				}
+				if (completed === 'false' && task.getAttribute('data-status') === '2') {
+					show = false;
+				}
+
+				// Gecikmiş filtresi
+				if (overdue === 'true' && task.getAttribute('data-overdue') !== 'true') {
+					show = false;
+				}
+
+				// Yaklaşan görevler filtresi
+				if (upcoming) {
+					const dueDate = new Date(task.getAttribute('data-duedate'));
+					const diffDays = Math.ceil((dueDate - now) / (1000 * 60 * 60 * 24));
+					if (diffDays < 0 || diffDays > parseInt(upcoming)) {
+						show = false;
+					}
+				}
+
+				// Arama filtresi
+				if (searchText) {
+					const title = task.querySelector('h5').textContent.toLowerCase();
+					const description = task.querySelector('p').textContent.toLowerCase();
+					if (!title.includes(searchText) && !description.includes(searchText)) {
+						show = false;
+					}
+				}
+
+				task.style.display = show ? 'block' : 'none';
+			});
+
+			// Sonuç sayısını göster
+			const visibleCount = document.querySelectorAll('.task-item[style="display: block;"]').length;
+			console.log(`${visibleCount} görev gösteriliyor`);
+		}
+
+		// Enter tuşu ile arama
+		document.getElementById('filterSearch').addEventListener('keypress', function(e) {
+			if (e.key === 'Enter') {
+				applyAllFilters();
+			}
+		});
+	</script>
+}

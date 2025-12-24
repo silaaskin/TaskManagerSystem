@@ -1,0 +1,365 @@
+@model TaskManagerSystem.Models.UserTask
+@{
+    ViewData["Title"] = "Görevi Düzenle";
+    Layout = "_Layout";
+}
+
+<style>
+    /* Siyahlığı Kaldıran ve Yumuşatan Stil */
+    .form-control, .form-select {
+        background: rgba(45, 45, 70, 0.6) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        border-radius: 12px !important;
+        padding: 12px 18px !important;
+        transition: 0.3s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(186, 84, 245, 0.1) !important;
+            border-color: #ba54f5 !important;
+            box-shadow: 0 0 15px rgba(186, 84, 245, 0.2) !important;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+    .glass-card {
+        background: #27293d;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+    }
+
+    /* YENİ: Modern Dosya Kartları */
+    .file-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 12px;
+        transition: all 0.3s ease;
+    }
+
+        .file-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(186, 84, 245, 0.5);
+            transform: translateY(-2px);
+        }
+
+    /* YENİ: Dosya Önizleme */
+    .file-preview {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 15px;
+    }
+
+    .file-preview-pdf {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    }
+
+    .file-preview-image {
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    }
+
+    .file-preview-doc {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .file-preview-excel {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .file-preview img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .file-list-container {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .file-info {
+        flex: 1;
+    }
+
+    .file-actions {
+        display: flex;
+        gap: 8px;
+    }
+</style>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-lg-8">
+        <!-- Görev Düzenleme Formu -->
+        <div class="glass-card p-5 shadow-lg mb-4">
+            <h3 class="fw-bold mb-4 text-white">
+                <i class="fa-solid fa-pen-to-square me-2 text-warning"></i>Görevi Güncelle
+            </h3>
+
+            <form asp-action="Edit" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <input type="hidden" name="status" value="@Model.Status" />
+
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Başlık</label>
+                    <input type="text" class="form-control" name="title" value="@Model.Title" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-white-50 small">Açıklama</label>
+                    <textarea class="form-control" name="description" rows="4">@Model.Description</textarea>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-white-50 small">Kategori</label>
+                        <select class="form-select" name="category">
+                            <option value="1" selected="@(Model.Category == 1)">İş</option>
+                            <option value="2" selected="@(Model.Category == 2)">Kişisel</option>
+                            <option value="3" selected="@(Model.Category == 3)">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-white-50 small">Bitiş Tarihi</label>
+                        <input type="date" class="form-control" name="dueDate" value="@Model.DueDate.ToString("yyyy-MM-dd")" required />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label text-white-50 small">Bitiş Saati</label>
+                        <input type="time" class="form-control" name="dueTime" value="@Model.DueTime.ToString(@"hh\:mm")" required />
+                    </div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-lg px-5 rounded-pill shadow" style="background: #ba54f5; color:white; border:none;">
+                        <i class="fa-solid fa-save me-2"></i>Değişiklikleri Kaydet
+                    </button>
+                    <a href="/Tasks/Index" class="btn btn-lg btn-outline-light px-5 rounded-pill border-opacity-25">
+                        <i class="fa-solid fa-times me-2"></i>Vazgeç
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Dosya Ekleri Bölümü -->
+        <div class="glass-card p-5 shadow-lg">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold text-white mb-0">
+                    <i class="fa-solid fa-paperclip me-2 text-success"></i>Dosya Ekleri
+                </h5>
+                <span class="badge rounded-pill bg-dark">@(Model.Attachments?.Count ?? 0) Dosya</span>
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="fileInput" multiple accept=".pdf,.png,.jpg,.jpeg,.docx,.xlsx">
+                <button class="btn btn-success px-4" type="button" onclick="uploadFile()">
+                    <i class="fa-solid fa-upload me-1"></i> Yükle
+                </button>
+            </div>
+
+            <div class="form-text text-white-50 small mb-4">
+                <i class="fa-solid fa-circle-info me-1"></i>
+                CTRL tuşuna basılı tutarak birden fazla dosya seçebilirsiniz. (Maks: Dosya başı 10MB)
+            </div>
+
+            <!-- Mevcut Dosyalar -->
+            @if (Model.Attachments != null && Model.Attachments.Any())
+            {
+                <div class="mb-4">
+                    <div class="form-text text-white-50 small mb-3 fw-bold">Yüklenmiş Dosyalar:</div>
+                    <div class="file-list-container">
+                        @foreach (var file in Model.Attachments)
+                        {
+                            var ext = System.IO.Path.GetExtension(file.OriginalFileName).ToLower();
+                            var isImage = ext == ".png" || ext == ".jpg" || ext == ".jpeg";
+
+                            string previewClass = "file-preview";
+                            string iconClass = "fa-file";
+
+                            if (ext == ".pdf")
+                            {
+                                previewClass += " file-preview-pdf";
+                                iconClass = "fa-file-pdf";
+                            }
+                            else if (isImage)
+                            {
+                                previewClass += " file-preview-image";
+                                iconClass = "fa-image";
+                            }
+                            else if (ext == ".docx")
+                            {
+                                previewClass += " file-preview-doc";
+                                iconClass = "fa-file-word";
+                            }
+                            else if (ext == ".xlsx")
+                            {
+                                previewClass += " file-preview-excel";
+                                iconClass = "fa-file-excel";
+                            }
+
+                            <div class="file-card d-flex align-items-center">
+                                <!-- Önizleme / İkon -->
+                                @if (isImage)
+                                {
+                                    <div class="@previewClass">
+                                        <img src="/Tasks/DownloadAttachment/@file.Id" alt="@file.OriginalFileName" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="@previewClass">
+                                        <i class="fa-solid @iconClass"></i>
+                                    </div>
+                                }
+
+                                <!-- Dosya Bilgisi -->
+                                <div class="file-info">
+                                    <div class="text-white fw-bold mb-1">@file.OriginalFileName</div>
+                                    <div class="text-white-50 small">
+                                        <i class="fa-regular fa-clock me-1"></i>
+                                        @file.UploadDate.ToString("dd MMM yyyy, HH:mm")
+                                        <span class="mx-2">•</span>
+                                        @if (file.FileSize > 1024 * 1024)
+                                        {
+                                            @((file.FileSize / 1024.0 / 1024.0).ToString("0.##")) <span>MB</span>
+                                        }
+                                        else
+                                        {
+                                            @((file.FileSize / 1024.0).ToString("0.##")) <span>KB</span>
+                                        }
+                                    </div>
+                                </div>
+
+                                <!-- İşlemler -->
+                                <div class="file-actions">
+                                    <a href="@Url.Action("PreviewAttachment", new { id = file.Id })"
+                                       class="btn btn-sm btn-outline-info"
+                                       target="_blank"
+                                       title="Önizle">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="@Url.Action("DownloadAttachment", new { id = file.Id })"
+                                       class="btn btn-sm btn-outline-success"
+                                       title="İndir">
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+                                    <button onclick="deleteFile(@file.Id)"
+                                            class="btn btn-sm btn-outline-danger"
+                                            title="Sil">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <i class="fa-solid fa-inbox fa-3x mb-3 opacity-25"></i>
+                    <p class="mb-0">Henüz dosya eklenmemiş.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dosya Yükleme Fonksiyonu
+    function uploadFile() {
+        var fileInput = document.getElementById('fileInput');
+        var files = fileInput.files;
+
+        if (files.length === 0) {
+            alert("Lütfen en az bir dosya seçin.");
+            return;
+        }
+
+        // Yükleme butonunu devre dışı bırak
+        var btn = document.querySelector('.btn-success');
+        var originalHtml = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Yükleniyor...';
+
+        // Tüm dosyaları sırayla yükle
+        let uploadedCount = 0;
+        let failedCount = 0;
+
+        Array.from(files).forEach((file, index) => {
+            var formData = new FormData();
+            formData.append('file', file);
+            formData.append('taskId', '@Model.Id');
+
+            fetch('/Tasks/UploadAttachment', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    uploadedCount++;
+                } else {
+                    failedCount++;
+                }
+
+                // Son dosya yüklendiyse sayfayı yenile
+                if (uploadedCount + failedCount === files.length) {
+                    if (failedCount > 0) {
+                        alert(`${uploadedCount} dosya yüklendi, ${failedCount} dosya yükleme başarısız oldu.`);
+                    }
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                failedCount++;
+
+                if (uploadedCount + failedCount === files.length) {
+                    alert("Yükleme işlemi sırasında hata oluştu.");
+                    btn.disabled = false;
+                    btn.innerHTML = originalHtml;
+                }
+            });
+        });
+    }
+
+    // Dosya Silme Fonksiyonu
+    function deleteFile(id) {
+        if (!confirm('Bu dosyayı silmek istediğinize emin misiniz?')) return;
+
+        var formData = new FormData();
+        formData.append('id', id);
+
+        fetch('/Tasks/DeleteAttachment', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert("Silme başarısız: " + (data.message || "Bilinmeyen hata"));
+            }
+        })
+        .catch(error => {
+            console.error('Hata:', error);
+            alert("Silme işlemi sırasında hata oluştu.");
+        });
+    }
+</script>

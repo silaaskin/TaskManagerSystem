@@ -1,0 +1,217 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\views\\tasks\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:views\\tasks\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\models\\usertask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:models\\usertask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\views\\tasks\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:views\\tasks\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\views\\tasks\\previewattachment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:views\\tasks\\previewattachment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\models\\taskattachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:models\\taskattachment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\models\\taskstatsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:models\\taskstatsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|c:\\users\\hayru\\desktop\\taskmanagersystem (3)\\taskmanagersystem\\taskmanagersystem\\taskmanagersystem\\migrations\\20251224160430_addcreatedbytousertask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4ACEF57B-2FF1-D3FD-0FC8-E1ADFC78A6C1}|TaskManagerSystem.csproj|solutionrelative:migrations\\20251224160430_addcreatedbytousertask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 958,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:149045830:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "20251224160430_AddCreatedByToUserTask.cs",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Migrations\\20251224160430_AddCreatedByToUserTask.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251224160430_AddCreatedByToUserTask.cs",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Migrations\\20251224160430_AddCreatedByToUserTask.cs",
+              "RelativeToolTip": "Migrations\\20251224160430_AddCreatedByToUserTask.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T16:04:30.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-24T15:48:43.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TasksController.cs",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Controllers\\TasksController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TasksController.cs",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Controllers\\TasksController.cs",
+              "RelativeToolTip": "Controllers\\TasksController.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAgwH0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T15:47:45.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-24T15:43:27.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Tasks\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Tasks\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Tasks\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Tasks\\Edit.cshtml",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-24T15:42:55.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Tasks\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Tasks\\Index.cshtml",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Tasks\\Index.cshtml",
+              "RelativeToolTip": "Views\\Tasks\\Index.cshtml",
+              "ViewState": "AgIAAJYBAAAAAAAAAAAAAHABAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-24T15:42:54.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PreviewAttachment.cshtml",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Tasks\\PreviewAttachment.cshtml",
+              "RelativeDocumentMoniker": "Views\\Tasks\\PreviewAttachment.cshtml",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Views\\Tasks\\PreviewAttachment.cshtml",
+              "RelativeToolTip": "Views\\Tasks\\PreviewAttachment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-24T15:42:53.145Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TaskAttachment.cs",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Models\\TaskAttachment.cs",
+              "RelativeDocumentMoniker": "Models\\TaskAttachment.cs",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Models\\TaskAttachment.cs",
+              "RelativeToolTip": "Models\\TaskAttachment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T15:42:50.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TaskStatsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Models\\TaskStatsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\TaskStatsViewModel.cs",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Models\\TaskStatsViewModel.cs",
+              "RelativeToolTip": "Models\\TaskStatsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T15:42:09.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-24T15:29:26.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwDkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T15:27:50.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserTask.cs",
+              "DocumentMoniker": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Models\\UserTask.cs",
+              "RelativeDocumentMoniker": "Models\\UserTask.cs",
+              "ToolTip": "C:\\Users\\hayru\\Desktop\\TaskManagerSystem (3)\\TaskManagerSystem\\TaskManagerSystem\\TaskManagerSystem\\Models\\UserTask.cs",
+              "RelativeToolTip": "Models\\UserTask.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAqwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-23T21:57:41.018Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
